@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Munagamage D.C.S — Medical Biotechnology Portfolio</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#040612;
+    --card:#07122a;
+    --accent1:#45f3d9;
+    --accent2:#77b8ff;
+    --muted:#9fb3d0;
+    --glass: rgba(255,255,255,0.03);
+    --glass-2: rgba(255,255,255,0.02);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:linear-gradient(180deg,var(--bg) 0%, #06102a 100%);
+    color:#e6f7ff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+
+  /* NAV */
+  nav{
+    position:fixed;top:14px;left:50%;transform:translateX(-50%);
+    z-index:120;width:94%;max-width:1200px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:10px 18px;border-radius:14px;
+    backdrop-filter: blur(8px);
+    background:linear-gradient(90deg, rgba(10,18,35,0.6), rgba(10,18,35,0.25));
+    border:1px solid rgba(255,255,255,0.04);
+    box-shadow:0 6px 30px rgba(0,0,0,0.6);
+  }
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo .avatar{
+    width:44px;height:44px;border-radius:10px;border:2px solid var(--accent1);
+    overflow:hidden;box-shadow:0 0 20px rgba(69,243,217,0.06)
+  }
+  .logo h1{font-family:Orbitron, sans-serif;font-weight:600;font-size:1.05rem;color:var(--accent1);margin:0}
+  .nav-links{display:flex;gap:18px;align-items:center}
+  .nav-links a{
+    color:var(--muted);text-decoration:none;font-weight:600;font-size:.9rem;padding:8px 12px;border-radius:8px;
+  }
+  .nav-links a:hover{color:#fff;background:linear-gradient(90deg, rgba(119,184,255,0.06), rgba(69,243,217,0.04))}
+
+  /* Hero */
+  .hero{
+    min-height:84vh;display:flex;align-items:center;justify-content:center;padding:20px;
+    position:relative;overflow:visible;
+  }
+  .hero-inner{
+    width:100%;max-width:1200px;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;
+  }
+
+  /* Left: Intro card */
+  .intro{
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 12px 40px rgba(6,16,40,0.6);
+    position:relative;overflow:hidden;
+  }
+  .eyebrow{color:var(--accent2);font-weight:700;margin-bottom:8px;display:inline-block}
+  .intro h2{font-size:2rem;margin:8px 0 6px;color:var(--accent1);font-family:Orbitron, sans-serif}
+  .intro p{color:var(--muted);line-height:1.6}
+  .cta-row{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;
+    font-weight:700;text-decoration:none;border:0;cursor:pointer;
+    background:linear-gradient(90deg,var(--accent1),var(--accent2));
+    color:#031226;box-shadow:0 8px 30px rgba(69,243,217,0.08);
+  }
+  .btn-outline{
+    background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent1);
+  }
+
+  /* Key stats row */
+  .stats{display:flex;gap:12px;margin-top:20px}
+  .stat{
+    background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);
+    min-width:110px;text-align:center;
+  }
+  .stat .num{font-weight:800;color:var(--accent2);font-size:1.2rem}
+  .stat .lbl{font-size:.78rem;color:var(--muted);margin-top:6px}
+
+  /* Right: Visual card with DNA + heartbeat */
+  .visual{
+    background:linear-gradient(180deg, rgba(119,184,255,0.04), rgba(69,243,217,0.02));
+    border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:360px;position:relative;overflow:hidden;
+  }
+  .device{
+    width:100%;max-width:360px;height:260px;border-radius:12px;background:linear-gradient(180deg,#031226,#072338);
+    border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;
+    position:relative;box-shadow: inset 0 -40px 120px rgba(0,0,0,0.35), 0 30px 60px rgba(3,18,38,0.6);
+  }
+
+  /* DNA helix animation (SVG) */
+  .dna-svg {width:340px;height:240px;display:block}
+  /* small info pane under device */
+  .v-info{margin-top:12px;text-align:center;color:var(--muted);font-size:.95rem}
+
+  /* Section cards */
+  main{max-width:1200px;margin:30px auto;padding:18px}
+  section.card{
+    background:linear-gradient(180deg,var(--card), rgba(7,18,42,0.55));
+    border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.03);
+    box-shadow:0 18px 40px rgba(2,8,20,0.6);opacity:0;transform:translateY(20px);
+    transition:all .6s ease;
+  }
+  section.card.visible{opacity:1;transform:translateY(0)}
+  section.card h3{margin:0 0 12px;color:var(--accent2);font-family:Orbitron}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .box{
+    background:var(--glass-2);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);
+  }
+  .box h4{margin:0 0 8px;color:#dff7f0}
+  .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;color:var(--muted);font-size:.82rem}
+
+  /* Skill bars */
+  .skill {margin-top:10px}
+  .skill .label{display:flex;justify-content:space-between;font-size:.92rem;color:var(--muted)}
+  .bar{height:10px;background:#021029;border-radius:8px;margin-top:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width 1.2s ease}
+
+  /* Publications / Projects list */
+  .list{display:flex;flex-direction:column;gap:10px}
+  .list .item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;background:rgba(255,255,255,0.015);border:1px solid rgba(255,255,255,0.02)}
+  .list .meta{font-size:.82rem;color:var(--muted)}
+
+  /* Contact / footer */
+  footer{max-width:1200px;margin:20px auto;padding:18px;text-align:center;color:var(--muted)}
+  footer .small{font-size:.88rem}
+
+  /* Floating laboratory particle icons */
+  .lab-particles{pointer-events:none;position:fixed;right:20px;bottom:20px;z-index:30;display:flex;flex-direction:column;gap:12px;opacity:.85}
+  .lab-particles svg{width:60px;height:60px;filter:drop-shadow(0 6px 20px rgba(0,0,0,0.5))}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .visual{order:-1}
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr}
+    .device{height:200px}
+  }
+
+  /* small animation helpers */
+  .pulse {
+    display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+    color:#021225;font-weight:800;box-shadow:0 8px 40px rgba(69,243,217,0.06);
+    transform-origin:center;
+    animation:pop .9s ease infinite;
+  }
+  @keyframes pop{
+    0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}
+  }
+
+  /* ECG heartbeat animation */
+  .ecg{width:100%;height:42px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+  .ecg svg{display:block;width:100%;height:100%}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="avatar"><img src="IMG_4682.JPG" alt="Avatar" style="width:100%;height:100%;object-fit:cover"></div>
+    <div>
+      <h1>Munagamage D.C.S</h1>
+      <div style="font-size:.82rem;color:var(--muted)">Medical Biotechnology • AI Genomics</div>
+    </div>
+  </div>
+
+  <div class="nav-links" role="navigation" aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#skills">Techniques</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Introduction">
+  <div class="hero-inner">
+    <div class="intro">
+      <div class="eyebrow">Medical Biotechnology Portfolio</div>
+      <h2>Munagamage D.C.S</h2>
+      <p>
+        Biotechnology undergraduate focused on medical & translational research: genomics, diagnostic assay development, and AI-driven biomarker discovery.
+        I combine wet-lab expertise with Python/data skills to push precision medicine forward.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn" href="#projects">View Projects</a>
+        <!-- Replace the href with your CV file path if you want direct download -->
+        <a class="btn btn-outline" id="resumeBtn" href="HS25510282_CV.pdf" target="_blank">📄 Download Resume</a>
+      </div>
+
+      <div class="stats" role="list" aria-hidden="false">
+        <div class="stat" role="listitem">
+          <div class="num">Genomics</div>
+          <div class="lbl">NGS & Analysis</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="num">Molecular</div>
+          <div class="lbl">PCR, ELISA, WB</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="num">AI</div>
+          <div class="lbl">ML for bio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="device" aria-hidden="true">
+        <!-- DNA + ECG blending SVG -->
+        <svg class="dna-svg" viewBox="0 0 340 240" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#45f3d9"/>
+              <stop offset="1" stop-color="#77b8ff"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="b" />
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- two helix strands -->
+          <g transform="translate(20,0)" filter="url(#glow)">
+            <path id="s1" d="M20,20 C60,40 60,120 20,140 C-20,160 -20,220 20,220" stroke="url(#g1)" stroke-width="3" fill="none" stroke-linecap="round" stroke-opacity="0.95"/>
+            <path id="s2" d="M320,20 C280,40 280,120 320,140 C360,160 360,220 320,220" stroke="#a7ffe9" stroke-width="3" fill="none" stroke-linecap="round" stroke-opacity="0.85"/>
+          </g>
+
+          <!-- rungs -->
+          <g id="rungs" transform="translate(0,0)" stroke="#9fdff3" stroke-width="2.2" stroke-linecap="round" opacity="0.95">
+            <!-- many short lines will be animated by JS -->
+          </g>
+
+          <!-- ECG inset at bottom -->
+          <g transform="translate(20,170)" opacity="1">
+            <rect x="0" y="0" width="300" height="56" rx="6" fill="rgba(0,0,0,0.12)"></rect>
+            <path id="ecg-path" d="" stroke="#e7fffb" stroke-width="2.2" fill="none" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="v-info">
+        <span class="pulse">AI Genomics • Diagnostic Assays</span>
+        <div style="margin-top:10px;color:var(--muted)">Live demo animations: DNA helix + ECG pulse • click Projects to explore</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main content -->
+<main>
+  <!-- ABOUT -->
+  <section id="about" class="card">
+    <h3>About</h3>
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px">
+        <p style="color:var(--muted)">I am a Biotechnology student at SLIIT focusing on translational medical biotechnology: building diagnostics, interpreting genomic datasets, and applying ML to biomarker discovery. I'm proficient in Python, Biopython, R for stats, and wet-lab molecular techniques (PCR, electrophoresis, ELISA).</p>
+
+        <div style="margin-top:12px">
+          <span class="pill">Genomics</span> <span class="pill" style="margin-left:8px">Diagnostics</span> <span class="pill" style="margin-left:8px">AI / ML</span>
+        </div>
+      </div>
+
+      <div style="width:320px">
+        <h4 style="color:var(--accent1);margin:0 0 8px">Contact</h4>
+        <div style="color:var(--muted)">Email: hs25510282@my.sliit.lk</div>
+        <div style="color:var(--muted)">Phone: +94 77 227 1816</div>
+        <div style="margin-top:10px"><a class="btn" href="mailto:hs25510282@my.sliit.lk">Email Me</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research / Techniques -->
+  <section id="research" class="card">
+    <h3>Key Techniques & Research</h3>
+    <div class="grid">
+      <div class="box">
+        <h4>Next-Gen Sequencing</h4>
+        <div class="meta">Library prep • QC • Variant calling • RNA-Seq</div>
+      </div>
+      <div class="box">
+        <h4>Molecular Diagnostics</h4>
+        <div class="meta">qPCR • ELISA design • Point-of-care assay prototyping</div>
+      </div>
+      <div class="box">
+        <h4>AI for Biomarkers</h4>
+        <div class="meta">Feature engineering • Model validation • Explainability</div>
+      </div>
+      <div class="box">
+        <h4>Protein Work</h4>
+        <div class="meta">SDS-PAGE • Western blot • Spectrophotometry</div>
+      </div>
+      <div class="box">
+        <h4>Lab Data Analysis</h4>
+        <div class="meta">R / Python • Biopython • Pandas • Visualization</div>
+      </div>
+      <div class="box">
+        <h4>Regulatory / Ethics</h4>
+        <div class="meta">Biosafety awareness • Data privacy & patient ethics</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="card">
+    <h3>Technical Skills</h3>
+    <div style="display:flex;gap:24px;flex-wrap:wrap">
+      <div style="flex:1;min-width:280px">
+        <div class="skill">
+          <div class="label"><span>Python (bioinformatics)</span><span>90%</span></div>
+          <div class="bar"><i data-width="90%"></i></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Molecular Lab</span><span>85%</span></div>
+          <div class="bar"><i data-width="85%"></i></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Next-Gen Analysis</span><span>78%</span></div>
+          <div class="bar"><i data-width="78%"></i></div>
+        </div>
+      </div>
+
+      <div style="flex:1;min-width:280px">
+        <div style="padding:12px;background:rgba(255,255,255,0.02);border-radius:10px">
+          <h4 style="margin:0 0 6px">Selected Tools</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="pill">Python</span>
+            <span class="pill">R</span>
+            <span class="pill">Biopython</span>
+            <span class="pill">BWA / GATK</span>
+            <span class="pill">qPCR</span>
+            <span class="pill">ELISA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="card">
+    <h3>Projects</h3>
+    <div class="list">
+      <div class="item">
+        <div style="flex:1">
+          <strong>COVID-19 RT-qPCR assay mini-validation</strong>
+          <div class="meta">Assay optimisation, LoD testing, data analysis — A practical lab project for diagnostic sensitivity and specificity.</div>
+        </div>
+        <div style="min-width:120px;text-align:right"><span class="pill">Wet-lab • Assay</span></div>
+      </div>
+
+      <div class="item">
+        <div style="flex:1">
+          <strong>Variant analysis pipeline (RNA-Seq)</strong>
+          <div class="meta">End-to-end pipeline: trimming, alignment, differential expression & candidate biomarker selection using Python.</div>
+        </div>
+        <div style="min-width:120px;text-align:right"><span class="pill">NGS • Bioinfo</span></div>
+      </div>
+
+      <div class="item">
+        <div style="flex:1">
+          <strong>ML classifier for biomarker prioritization</strong>
+          <div class="meta">Feature selection, model comparison and explainability for small clinical datasets.</div>
+        </div>
+        <div style="min-width:120px;text-align:right"><span class="pill">ML • Python</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications / CV area -->
+  <section id="publications" class="card">
+    <h3>Resume & References</h3>
+    <p style="color:var(--muted)">Resume and reference details are available on request. If you want the resume button to link to your uploaded CV file, replace the download link with your PDF. (Reference: uploaded CV preview.)</p>
+    <div style="margin-top:12px">
+      <a class="btn" href="HS25510282_CV.pdf" target="_blank">Download Resume (PDF)</a>
+      <a class="btn btn-outline" href="#contact" style="margin-left:8px">Request References</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="card">
+    <h3>Contact</h3>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+      <div style="flex:1;min-width:260px">
+        <p style="color:var(--muted)">Email: hs25510282@my.sliit.lk<br>Phone: +94 77 227 1816<br>Address: 353/3, Magammana, Homagama</p>
+        <div style="margin-top:10px">
+          <a class="btn" href="mailto:hs25510282@my.sliit.lk">Send Email</a>
+        </div>
+      </div>
+
+      <div style="flex:1;min-width:260px">
+        <h4 style="margin-top:0">Quick Message</h4>
+        <form id="contactForm" onsubmit="event.preventDefault();alert('Message sent (demo). Replace with real backend)');" style="display:flex;flex-direction:column;gap:8px">
+          <input name="name" placeholder="Your name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" required>
+          <input name="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" required>
+          <textarea name="msg" placeholder="Short message" rows="3" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" required></textarea>
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- floating lab particles - purely decorative -->
+<div class="lab-particles" aria-hidden="true">
+  <svg viewBox="0 0 64 64" class="lab1"><g fill="none" stroke="#77b8ff" stroke-width="1.6"><path d="M12 52c0-12 8-20 8-28" stroke-linecap="round"/></g></svg>
+  <svg viewBox="0 0 64 64" class="lab2"><g fill="none" stroke="#45f3d9" stroke-width="1.6"><circle cx="32" cy="20" r="10"/></g></svg>
+  <svg viewBox="0 0 64 64" class="lab3"><g fill="none" stroke="#77b8ff" stroke-width="1.6"><path d="M8 52h48M32 8v40" stroke-linecap="round"/></g></svg>
+</div>
+
+<footer>
+  <div class="small">Built for medical biotechnology portfolio • Designed for SLIIT students</div>
+  <div style="margin-top:8px;color:var(--muted)">© Munagamage D.C.S</div>
+</footer>
+
+<!-- Scripts: animations and reveal -->
+<script>
+  // simple on-scroll reveal for cards
+  const cards = document.querySelectorAll('section.card');
+  function reveal(){
+    const trigger = window.innerHeight * 0.85;
+    cards.forEach(c=>{
+      const r = c.getBoundingClientRect();
+      if(r.top < trigger) c.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', ()=>{
+    reveal();
+    animateBars();
+    buildRungsAndEcg();
+    animateParticles();
+  });
+
+  // animate skill bars
+  function animateBars(){
+    document.querySelectorAll('.bar > i').forEach(i=>{
+      const w = i.getAttribute('data-width') || '70%';
+      setTimeout(()=> i.style.width = w, 400);
+    });
+  }
+
+  // Build helix rungs and animate ECG path
+  function buildRungsAndEcg(){
+    const rungs = document.getElementById('rungs');
+    // create many rungs along the helix center
+    const rungCount = 12;
+    for(let i=0;i<rungCount;i++){
+      const t = i/(rungCount-1);
+      const y = 20 + t*200;
+      // compute left/right x to pair with curves above (approx)
+      const leftX = 40 + Math.sin(t*Math.PI*3)*32;
+      const rightX = 300 - Math.sin(t*Math.PI*3)*32;
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', leftX);
+      line.setAttribute('y1', y);
+      line.setAttribute('x2', rightX);
+      line.setAttribute('y2', y+0.5);
+      line.setAttribute('stroke-linecap','round');
+      line.setAttribute('opacity', 0.9 - Math.abs(0.5 - t)*1.6);
+      rungs.appendChild(line);
+    }
+
+    // ECG path: create a moving waveform using repeated path commands
+    const ecg = document.getElementById('ecg-path');
+    function makeECG(offset){
+      // simple repeating ECG-like shape
+      const w = 300;
+      const h = 40;
+      const step = w/12;
+      let d = 'M0 28 ';
+      for(let i=0;i<13;i++){
+        const x = i*step;
+        const v = Math.sin((i+offset)*1.7)*6;
+        // create a tall spike at certain positions to mimic QRS
+        const spike = (i%4===2) ? -18 : v;
+        const y = 28 + spike;
+        d += `L${x.toFixed(1)} ${y.toFixed(1)} `;
+      }
+      return d;
+    }
+    let t = 0;
+    setInterval(()=>{
+      ecg.setAttribute('d', makeECG(t/8));
+      t++;
+    }, 160);
+  }
+
+  // floating particles animation (lab icons)
+  function animateParticles(){
+    const parts = document.querySelectorAll('.lab-particles svg');
+    let dir = 1;
+    setInterval(()=>{
+      parts.forEach((p,i)=>{
+        const r = 6 + Math.sin((Date.now()/600)+i)*8;
+        p.style.transform = `translateY(${ -r }px) rotate(${ (Date.now()/40 + i*20)%360 }deg)`;
+        p.style.opacity = 0.7 + Math.sin((Date.now()/800)+i)/6;
+      });
+    }, 60);
+  }
+
+  // simple click to change resume href to uploaded resume (if you want)
+  // If you want the button to point to the uploaded resume file that was provided
+  // on the environment, uncomment and set the correct path:
+  // document.getElementById('resumeBtn').href = '/mnt/data/HS25102418_Laknath_E_A_R_7989823_assignsubmission_file_Resume.pdf';
+
+  // Accessible keyboard nav: focus visible styles
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Tab') document.body.classList.add('show-focus');
+  });
+</script>
+</body>
+</html>
